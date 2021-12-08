@@ -1,0 +1,110 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Drifter | Transpoter-Login
+{% endblock %}
+
+{% block content %}
+<style>
+    .container{
+        background-color : rgba(0,0,0,0.6) ;
+        border-radius : 10px ;
+        font-size : 18px ;
+    }
+
+    input {
+        color: black;
+    }
+
+    label {
+        letter-spacing: 2px;
+        margin-bottom: 2px;
+        margin-top : 2px ;
+        text-shadow: 2px 2px 5px rgba(0,0,0,0.2) ;
+    }
+
+    #inputbox {
+        width: 100%;
+        padding: 10px;
+        font-size: 18px;
+        letter-spacing: 2.5px;
+        margin-bottom: 30px;
+        border: none;
+        border-bottom: 2px solid black;
+        background-color: #fff;
+    }
+
+    #title {
+        font-size: 22px;
+        margin-top : 5px ;
+        text-shadow: 1px 1px 1px rgba(0,0,0,1) ;
+    }
+
+    #button{
+        padding : 10px 15px ;
+        font-size : 20px; ;
+        width : 50% ;
+        margin-left : 25% ;
+        transition-duration: 0.1s;
+        border-radius:4px ;
+    }
+
+    #button:hover{
+        letter-spacing : 2.2px ;
+        background-color : rgba(0,0,0,0.5) ;
+        border : 1px solid rgba(0,0,0,0.5) ;
+        color : white ;
+    }
+</style>
+<div class="container">
+    <div class="p-4 m-4">
+        <div class="col-lg-4 mt-4  mb-4 mx-auto rounded pt-4">
+            <div class="text-center col">
+            
+                <img 
+                src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c8/Shopping_cart_with_food_clip_art_2.svg/307px-Shopping_cart_with_food_clip_art_2.svg.png" alt=""
+                class="" style="height: 150px;">
+            <!-- <hr> -->
+            <div class="display-8" id="title">Login - Transporters </div>
+            <hr>
+            </div>
+            <h3 hidden class="alert alert-light border mt-4 mb-4 rounded">Login Here(Transporters)</h3>
+            <form action="/transporter_login" method="POST">
+                
+                {% csrf_token %}
+
+                {% if error%}
+                <div class="alert alert-danger" role="alert">
+                    {{error}}
+                </div>
+                {% endif %}
+                <!-- email -->
+                <div class="form-group">
+                    <label for="">Email</label>
+                    <input required type="email" name="email" id="inputbox"
+                    value="{{values.email}}" 
+                    class=" form-control-sm form-control" placeholder="example@gmail.com">
+                </div>
+
+
+                <!-- password -->
+                <div class="form-group">
+                    <label for="">Password</label>
+                    <input type="password" 
+                    name="password" 
+                    id="inputbox"
+                     class="form-control form-control-sm" placeholder="********">
+                </div>
+
+                <hr>
+                <div class="form-group">
+                    <input class="btn btn-sm btn-info col-lg-4" type="submit" value="Login" id="button">
+                </div>
+
+                
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

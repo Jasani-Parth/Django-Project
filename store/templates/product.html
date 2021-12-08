@@ -1,0 +1,135 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% load cart %}
+{% load custom_filter %}
+<div class="container my-4">
+
+	{% block title %}
+		Drifter | {{product.name}}
+	{% endblock %}
+	<!-- Featured Products -->
+	<h3 class="my-4 border-bottom pb-1">{{product.name}}</h3>
+	<div class="row">
+		<!-- Images -->
+		<div class="col-md-4">
+			<img src="{{product.image.url}}" class="card-img-top" alt="{{product.name}}">
+		</div>
+		<div class="col-md-8">
+			<h2>{{product.name}}</h2>
+			<h3><b>{{product.price|currency}}</b></h3>
+			<p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Corrupti ullam odit perferendis, ab accusamus debitis quas reiciendis sunt inventore totam dolores autem, eaque optio blanditiis, tempora eum id fugit porro repellendus. Iure ipsum exercitationem quis dolore dicta, a animi neque architecto? Harum, blanditiis sapiente maxime, at nobis quia asperiores expedita recusandae minus excepturi reiciendis ad! Illum aspernatur voluptatum odio numquam fugit aperiam. Saepe sunt provident aut nam iusto animi similique praesentium incidunt et? Suscipit et voluptas ab, amet illo fuga provident. In perferendis nostrum incidunt odio corporis doloribus veritatis aliquam inventore quia sequi impedit, repellat reprehenderit exercitationem quasi accusantium sapiente voluptates autem. Quisquam praesentium culpa doloribus necessitatibus fugit iure vero temporibus explicabo tempore quibusdam eveniet nemo quasi deleniti sit sunt eos maxime a accusantium porro provident enim sapiente unde, eius quis. Delectus magni maxime, veritatis nulla, placeat odit voluptate sequi molestias dignissimos soluta velit sapiente, ea excepturi necessitatibus consequatur officia.</p>
+		</div>
+	</div>
+	<hr />
+	<div class="row">
+		<div class="col-md-6">
+			<h3 class="my-3">Detail</h3>
+			<!-- Detail -->
+			<table class="table table-bordered">
+				<tr>
+					<th>Brand</th>
+					<td>My Brand</td>
+				</tr>
+				<tr>
+					<th>Category</th>
+					<td>{{product.category.name}}</td>
+				</tr>
+				<tr>
+					<th>Specification</th>
+					<td>Nice quality</td>
+				</tr>
+			</table>
+		</div>
+		<!-- Reviews -->
+		<div class="col-md-6">
+			<h3 class="my-3">Reviews - {{reviews|length}} <span class="avg-rating">({{product.rating|floatformat:1}})</span> <i class="fa fa-star text-warning"></i>
+				{% if request.session.customer %}
+				<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+					Add Review
+				</button>
+				{% endif %}
+			</h3>
+
+			<!-- Product Review -->
+			<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title">Add Your Review</h5>
+							<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+						</div>
+						<div class="modal-body">
+							<form action="/product?productid={{product.id}}" class="row g-3" method="POST">{% csrf_token %}
+								<div class="col-12">
+									<label for="inputComment" class="form-label">Review</label>
+									<input type="text" name="comment" class="form-control" id="inputComment"
+										placeholder="Type your review ...">
+								</div>
+								<div class="col-md-6">
+									<label for="inputRate" class="form-label">Rating</label>
+									<select id="inputRate" name="rate" class="form-select">
+										<option>1</option>
+										<option>2</option>
+										<option>3</option>
+										<option>4</option>
+										<option selected>5</option>
+									</select>
+								</div>
+								<div class="col-12">
+									<input type="submit" class="btn btn-primary">
+								</div>
+								<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- Product Review End -->
+			</h3>
+			<div class="card">
+				<div class="card-body review-list" style="max-height: 400px; overflow: auto;">
+					<!-- Detail -->
+					{% if reviews %}
+					{% for review in reviews %}
+					<div>
+						<p><b>{{review.customer.first_name}} {{review.customer.last_name}} ({{review.rate}}/5)</b>
+							<i>~{{review.created_at}}</i></p>
+						<blockquote><i>{{review.comment}}</i></blockquote>
+					</div>
+					<hr />
+					{% endfor %}
+					{% else %}
+					<p class="no-data">Be the first one to review this product ......</p>
+					{% endif %}
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Related Products -->
+	<h3 class="mt-4 mb-3 border-bottom pb-1">Recommended For You...</h3>
+	<a href="/?category={{product.category.id}}" class="btn btn-outline-primary mb-3">View More</a>
+	<div class="row">
+		{% for product in related %}
+		<div class="col-lg-3 col-sm-4 mb-4">
+			<div class="card shadow" style="width: 13rem;">
+				<a href="/product?productid={{product.id}}"><img src="{{product.image.url}}" class="card-img-top"
+						alt="{{product.name}}"></a>
+				<div class="card-body">
+					<h6 class="card-text"><a href="/product?productid={{product.id}}">{{product.name}}</a></h6>
+				</div>
+				<div class="card-footer">
+					<button class="btn btn-sm btn-primary"><i class="fa fa-shopping-cart"></i></button>
+					<button class="btn btn-sm btn-danger"><i class="fa fa-heart"></i></button>
+					<span class="float-right">
+						{{product.rating|floatformat:1}}/5
+						<i class="fa fa-star text-warning"></i>
+					</span>
+				</div>
+			</div>
+		</div>
+		{% endfor %}
+	</div>
+</div>
+
+{% endblock %}

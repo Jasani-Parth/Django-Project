@@ -1,0 +1,151 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Drifter | Customer-SignUp
+{% endblock %}
+
+{% block content %}
+
+<style>
+
+    #container{
+        background-color : rgba(0,0,0,0.6) ;
+        border-radius : 10px ;
+        width : 100% ;
+        height : 120% ;
+        color: #fff;
+        margin-top : 12% ;
+    }
+
+    img{
+        border-radius : 50% ;
+        position : absolute ;
+        margin-left : 42% ;
+        margin-top : 5% ;
+        width : 15% ;
+        height : 30% ;
+    }
+
+    #inputbox{
+        width: 100%;
+        padding: 10px;
+        font-size: 16px;
+        letter-spacing: 2.5px;
+        margin-bottom: 30px;
+        border: none;
+        border-bottom: 3px solid black;
+        background-color: #fff;
+    }
+
+    label{
+        margin-top : 2px ;
+        letter-spacing: 1px;
+        margin-bottom : 2px ;
+        font-size : 18px ;
+    }
+
+    .right{
+        border-radius : 24px ;
+        color : black ;
+    }
+
+    #title{
+        font-size : 40px ;
+        text-shadow: 2px 2px 5px rgba(0,0,0,0.2) ;
+        margin-top : 80px ;
+    }
+
+    #button{
+        background-color: rgb(0,0,0,0.8);
+        color : white ;
+        letter-spacing: 1px;
+        width: 70%;
+        height: 100%;
+        margin: 20px 10px 10px 65px;
+        transition-duration: 0.3s;
+    }
+    #button:hover{
+        background-color : rgba(0,0,0,0.7) ;
+        letter-spacing: 2.5px;
+    }
+
+</style>
+
+<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSPWmh9QWGTtlXYWXo8YdtDjCHe_0IUPegvJA&usqp=CAU" alt="">
+
+<div class="container" id="container">
+
+    <div class="right">
+        <div class="p-4 m-4" >
+        <div class="col-lg-5 mx-auto  pt-4">
+            <div class="text-center col ml-4">
+                <!-- <hr> -->
+                <div class="display-8" id="title">Create An Account</div>
+                <hr style="height:2.5px;border-width:1px;color:gray;background-color:white">
+            </div>
+
+            <form action="/signup" method="POST">
+
+                {% csrf_token %}
+
+                {% if error%}
+                <div class="alert alert-danger" role="alert">
+                    {{error}}
+                </div>
+                {% endif %}
+                <!-- firstname -->
+                <div class="form-group">
+                    <label for="">First Name</label>
+                    <input type="text" name="firstname"
+                           id="inputbox" value="{{values.first_name}}" class="form-control form-control-sm"
+                           placeholder="">
+                </div>
+
+                <!-- last name -->
+                <div class="form-group">
+                    <label for="">Last Name</label>
+                    <input type="text" name="lastname"
+                           id="inputbox" value="{{values.last_name}}" class="form-control form-control-sm"
+                    >
+                </div>
+
+                <!-- phone -->
+                <div class="form-group">
+                    <label for="">Phone</label>
+                    <input type="text" name="phone"
+                           id="inputbox" class="form-control form-control-sm"
+                           value="{{values.phone}}"
+                           placeholder="565698959"
+                    >
+                </div>
+                <!-- email -->
+                <div class="form-group">
+                    <label for="">Email</label>
+                    <input required type="email" name="email" id="inputbox"
+                           value="{{values.email}}"
+                           class=" form-control-sm form-control" placeholder="example@gmail.com">
+                </div>
+
+
+                <!-- password -->
+                <div class="form-group">
+                    <label for="">Password</label>
+                    <input type="password"
+                           name="password"
+                           id="inputbox"
+                           class="form-control form-control-sm" placeholder="********">
+                </div>
+
+                <hr style="height:2.5px;border-width:1px;color:gray;background-color:white">
+                <div class="form-group">
+                    <input class="btn btn-lg " id="button" type="submit" value="Create An Account ">
+                </div>
+
+
+            </form>
+        </div>
+    </div>
+    </div>
+</div>
+
+{% endblock %}

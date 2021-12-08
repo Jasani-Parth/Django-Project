@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Drifter - Profile | {{customer.first_name}} {{customer.last_name}}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@300&display=swap" rel="stylesheet">
+
+    <style>
+
+        h1{
+           font-size : 30px ;
+            text-shadow: 2px 2px 5px rgba(0,0,0,0.2) ;
+            font-family: 'Roboto Slab', serif;
+            letter-spacing : 2px ;
+            text-align : center ;
+        }
+
+        .text{
+            font-size : 24px ;
+            text-shadow: 2px 2px 5px rgba(0,0,0,0.2) ;
+            font-family: 'Roboto Slab', serif;
+            letter-spacing : 2px ;
+            padding-left : 2% ;
+        }
+
+        .container{
+            margin-left : 10% ;
+            margin-right : 10% ;
+            margin-top : 1.5% ;
+            margin-bottom : 10% ;
+            border : 2px solid green ;
+            background-color : rgba(0,255,0,0.4) ;
+        }
+
+        .right{
+            border : 2px solid red ;
+            background-color : rgba(255,125,0,0.5) ;
+            width : 50% ;
+            margin-left : 35% ;
+            margin-top : 6% ;
+            margin-bottom : 6%;
+        }
+
+        .left{
+            position : absolute ;
+            margin-top : 3% ;
+            margin-left : 3% ;
+        }
+
+        #logo{
+            width : 130% ;
+            height : 130% ;
+            border-radius : 50% ;
+            margin-top : 25%;
+        }
+
+        #small_logo{
+            position : relative;
+            width : 10% ;
+            height : 10%  ;
+            margin-top : 1% ;
+            padding-left : 2% ;
+            border-radius : 2px ;
+        }
+
+        input[type=button]{
+            font-size : 20px;
+            text-align : center ;
+            background-color : rgba(0,0,0,0.8) ;
+            color : white ;
+            width : 23% ;
+            margin-left : 1.5% ;
+            margin-bottom : 1.5% ;
+            border : none ;
+            text-decoration : none ;
+            padding: 15px 32px;
+            transition-duration: 0.3s;
+            border-radius : 1% ;
+        }
+
+        input[type=button]:hover{
+            letter-spacing : 2.5px ;
+            background-color: #4CAF50; /* Green */
+            color: white;
+            text-shadow: 2px 2px 5px rgba(0,0,0,0.2) ;
+        }
+
+    </style>
+</head>
+<body>
+<div class="container">
+
+    <h1>Hello , {{customer.first_name}} <br> {{timestamp.now}}</h1>
+    <div class="left">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRa9UI1y4Shr253ibETjPCOWNBWWpKgQsVKaw&usqp=CAU"
+             alt="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSQq6gaTf6N93kzolH98ominWZELW881HqCgw&usqp=CAU"
+             id="logo">
+    </div>
+    <div class="right">
+        <p>
+            <img src="data:image/png;base64,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"
+                 id="small_logo">
+        <div class="text"> Name &nbsp: {{customer.first_name}} {{customer.last_name}}</div>
+        </p>
+        <p>
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRd8Y7LuJgro5jRuEtioJbcUN4yyDTzORmg_g&usqp=CAU"
+                 id="small_logo">
+        <div class="text"> Phone&nbsp: {{customer.phone}}</div>
+        </p>
+        <p>
+            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAOEAAADhCAMAAAAJbSJIAAAAeFBMVEX///8AAADf399RUVHMzMxwcHBISEjl5eUXFxcnJyf7+/vu7u709PTS0tLi4uL19fXDw8OKiopgYGCYmJgdHR1mZmaDg4Oenp66urrY2NiWlpZ4eHgvLy+qqqpcXFxAQEA2Njazs7M7OzsLCwtMTEykpKQiIiJ9fX1ZzQorAAAEHUlEQVR4nO3c6VbiQBCG4ci+KooiMCIggvd/h9NICKlOgKTtJQfe55ceNN2fxxTVGaeiCAAAAAAAAAAAAAAAAAAAAAAAAMA96D/W/Hvs+4o3/Gl1HkLotCZDD/kW3SDpjroLx/kar0Hz7XUaLgM+h47369ldwLfQ2WJvrgK+hE6W+HQTcJJaotuq+9ZKl7iJi4Cj0/Xn7ScXK1wxaM9PWxjZv35vd7r8l4PrFzBapn6J7F/+XdwIy5n9Fa6YLcUO3q0voN/szUfrS1zSbuobsL3CSF9AvS35uxmfct6Ibd8pmR/h3tbyIuds8xZvWl4krjPrqWhLdz5Kzkh0irvp4vCB5VrTjq/fj3qy5NRdd/vDulhv3Iv68Ydtu+scLrrqqY8HP2LNN7srSX15d/zbHxF7q8Mndn+2jTjN4bO27N8mrkpOTxaYz7h8x6vbPWM0tLu70RJrL3pWVzvoLcQayyRR00fCKJru0suvplaX+11glV6gsz694ilhFI3lj9hul1P7Flefp1/zljAaTMQuLJactjyJ/huIV/0ljKJHWXKeB7nfXJbWwXzWtNd9JlQviH64Y6Mf3op3+FU2iN+EqiKIR4udv3Y5I1HBNuucL/GdUJWcTXpTrb+8E2sdzDz3Xch/Qr3LaZqWnHZOB5MjQEJVcj7F3iYmHYDWwdT1ApMIklD9fn2J/ZU/WMkOJqfAJAIljKL1R3qLH+W6nJH45m5egUkES6gfrL6Ll5xZ5oh0SbiE2YNVsX8PyzsiXRIyYeZgVaDL0TuY60+4wiZUXyp65s32SlldiIahVaRhCJ1QlRyx6e6lTcsC83CxwCTCJ9QfH7fOHaxmF45IF1QhYaFnOXoHU/hgUomE6ggrj3iZkqMVmJcSB+iKJFRdjrzHZJcjO5huqd1WJqE6WInHx51TlyOPSLtiBSZRoYRnupxyHUxWlRKqfkU+y1EHK63A/JT/O6BqJVQlUx6sZAGqmxwlq5Yw8/j4ZGm2yeol1EtOrGyBSVQxoV5y9koXmEQlE6p3eNnlFO9gsiqaUHQ5L2efwRRR2YTJ4+OvP+6twglVyfl4+DAtMIlKJ7SChEZI6BUJjZDQKxIaIaFXJDRCQq9IaISEXpHQCAm9IqEREnpFQiMk9IqERkjoFQmNkNArEhohoVckNEJCr0ho5G4SOhvQVIqT/4+fnqkQmpuZCqe5GOG5mYtxnG3ieuJdEW5mmxzv7o7ly5rYuKl6xxlDY8vXLe848Mv6aJz4upYrWHmN40asX/m9GhGTgPZnfUXJH6M7HMx4VTKTzsG8ttS0r9dxzc4AjHIGtfFpnoSTAVU3PzfxDmZf3sH80juYQauKddg5yXuvrt+ubn0W9N5wctvzvH/d+Ex2AAAAAAAAAAAAAAAAAAAAAAAAAEH9B/DBM6Vym7h+AAAAAElFTkSuQmCC"
+                 id="small_logo">
+        <div class="text"> Email &nbsp: {{customer.email}}</div>
+        </p>
+
+    </div>
+    <div class="buttons">
+        <a href="/"><input type="button" value="Home"></a>
+            <a href="/edit"><input type="button" value="Edit Profile"></a>
+            <a href="/cart"><input type="button" value="Cart"></a>
+
+        <a href="/orders"><input type="button" value="Orders"></a>
+        </div>
+</div>
+</body>
+</html>

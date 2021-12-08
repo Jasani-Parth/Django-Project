@@ -1,0 +1,131 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Drifter | Order Your Thoughts
+{% endblock %}
+
+{% block navbar %}
+<form class="d-flex">
+	<input class="form-control me-2" action="" name="search" type="search" placeholder="Search" aria-label="Search">
+	<button class="btn btn-outline-warning" type="submit">Search</button>
+</form>
+{% endblock %}
+
+{% block content %}
+
+{% load cart %}
+{% load custom_filter %}
+
+<style>
+	#filterform{
+		margin-top : 20% ;
+		position : relative ;
+		padding : 10px 10px ;
+		border-radius : 5px ;
+		border : 1px solid silver ;
+	}
+
+	label{
+		width : 100% ;
+		font-size : 26px ;
+		margin-left : 23% ;
+		margin-bottom : 0.5% ;
+		color : rgba(255,0,0,0.8) ;
+		text-shadow : 1px 1px 1px red ;
+	}
+
+	#fp{
+		margin-top : 10% ;
+		margin-bottom : 5% ;
+	}
+
+</style>
+<!-- body -->
+<div class="container-fluid mt-3">
+	<div class="row">
+
+
+		<!-- filter -->
+
+		<div class="col-lg-3 mx-auto">
+			<div class="list-group">
+
+				<a href="/" class="list-group-item list-group-item-action">All Products</a>
+
+				{% for category in categories %}
+				<a href="/?category={{category.id}}"
+					class="list-group-item list-group-item-action">{{category.name}}</a>
+				{% endfor %}
+				
+
+				<div id="filterform">
+					<label> Filter By Price </label>
+					<hr>
+					<form class="d-flex" id="fp">
+						<input class="form-control me-1" action="" name="min" type="min" placeholder="Min" aria-label="Min">
+						<input class="form-control me-1" action="" name="max" type="max" placeholder="Max" aria-label="Max">
+						<button class="btn btn-outline-danger" type="submit">FILTER</button>
+					</form>
+				</div>
+				
+			</div>
+		</div>
+
+		<!-- all products -->
+		<div id='products' class="col-lg-9 mx-auto">
+			<div class="row mx-auto">
+				{% for product in products %}
+				<div class="card mx-auto mb-3" id={{product.id}} style="width: 18rem;">
+					<img class="card-img-top" src="{{product.image.url}}" alt="Card image cap">
+					<div class="card-body">
+						<p class="card-title">{{product.name}}</p>
+						<p class="card-text"><b>{{product.price|currency}}</b></p>
+						<!-- {{product | is_in_cart:request.session.cart }} -->
+					</div>
+
+					<div class="card-footer p-0 no-gutters">
+
+						{% if product|is_in_cart:request.session.cart %}
+						<div class="container p-0">
+							<a href="/product?productid={{product.id}}" class="btn btn-dark col-lg-12 mb-2"> View Product </a>
+							<div class="row">
+								<div class="col-2">
+									<form action="/#{{product.id}}" class="border-right" method="post">
+										{% csrf_token %}
+										<input hidden type="text" name='product' value='{{product.id}}'>
+										<input hidden type="text" name='remove' value='True'>
+										<input type="submit" value=" - " class="btn btn-dark">
+									</form>
+								</div>
+								<div class="text-center col-7 col">{{product|cart_quantity:request.session.cart}} in
+									Cart</div>
+								<div class="col-2">
+									<form action="/#{{product.id}}" class="" method="post">
+										{% csrf_token %}
+										<input hidden type="text" name='product' value='{{product.id}}'>
+										<input type="submit" value=" + " class="btn btn-block btn-dark border-left">
+									</form>
+								</div>
+							</div>
+						</div>
+						{% else %}
+						<a href="/product?productid={{product.id}}" class="btn btn-dark col-lg-12 mb-2"> View Product
+						</a>
+						<form action="/#{{product.id}}" method="POST" class="btn-block">
+							{% csrf_token %}
+							<input hidden type="text" name='product' value='{{product.id}}'>
+							<input type="submit" class="btn btn-dark form-control" value="Add To Cart">
+						</form>
+						{% endif %}
+					</div>
+
+				</div>
+				{% endfor %}
+			</div>
+		</div>
+	</div>
+</div>
+
+
+
+{% endblock %}
