@@ -1,4 +1,4 @@
-# Django-Project
+# Drifter E-store
 
 - This is Online store 🏬.
 - we haven't include price features to it because this is part of our course project and also due to small team.
