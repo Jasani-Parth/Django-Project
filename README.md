@@ -31,3 +31,10 @@
 - Order Will Automatically Assign To Avaible Transpoter
 - Transpoter Can Change Product Delivary status 
 - Sell All Deliverd/Undeliverd Products
+
+# Installation
+
+- Install the virtualenv package
+  ```
+  pip install virtualenv
+  ```
