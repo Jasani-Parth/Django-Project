@@ -51,13 +51,13 @@
   ```venv/Script/activate```
 
 - Installing Modules
-  ```pip install django``` 
-  ```pip install pillow```
+  ```pip install django```  <br />
+  ```pip install pillow```  <br />
  
 - Run the Django project
-  ```python manage.py runserver x.x.x.x:8080``` 
-  or 
-  ```python manage.py runserver```
+  ```python manage.py runserver x.x.x.x:8080```  <br />
+  or <br />
+  ```python manage.py runserver``` <br />
  
 - Deactivate the virtual environment
   ```deactiavte```
