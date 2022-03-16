@@ -50,16 +50,16 @@
   - Windows        
   ```venv/Script/activate```
 
-- Installing Modules
+- Installing Modules <br />
   ```pip install django```  <br />
   ```pip install pillow```  <br />
  
-- Run the Django project
+- Run the Django project <br />
   ```python manage.py runserver x.x.x.x:8080```  <br />
   or <br />
   ```python manage.py runserver``` <br />
  
-- Deactivate the virtual environment
+- Deactivate the virtual environment <br />
   ```deactiavte```
    
  NOTE : Point 1,2,4 is for first time executing project
